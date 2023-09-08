@@ -5,8 +5,6 @@ a = 497
 b = 1768
 p = 9739
 
-
-
 def point_addition(P, Q):
     # Define zero
     O = (0, 0)
@@ -42,8 +40,6 @@ def point_addition(P, Q):
     summation = (x3, y3)
     return summation
 
-#--------Testing--------#
-
 
 P = (493, 5564)
 Q = (1539, 4742) 
@@ -51,6 +47,4 @@ R = (4403,5202)
 
 
 S = point_addition(point_addition(point_addition(P, P), Q), R)
-#print("crypto{%1, %2}" % S[0], S[1] )
-#print('crypto{%(x), %(y)}' % {"x": str(S[0]), "y": str(S[1])})
 print("crypto{"+ f"{S[0]}, {S[1]}" + "}")
