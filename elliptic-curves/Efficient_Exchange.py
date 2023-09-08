@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 from Crypto.Util.number import inverse
+from Decrypt import decrypt_flag
+from hashlib import sha1
 
+#what the heck is this task?
 a = 497
 b = 1768
 p = 9739
-
 
 
 def point_addition(P, Q):
@@ -57,11 +59,21 @@ def scalar_multiplication(n, P):
 		n //=2
 	return R
 
+def sqrt(x, p):
+    for i in range(1, p):
+        if pow(i, 2) % p == x:
+            return (i, p - i)
+    return None
 
 
-
-P = (2339, 2213)
-
-Q = scalar_multiplication(7863, P)
-print("crypto{"+ f"{Q[0]}, {Q[1]}" + "}")
-
+G = (1804,5368)
+q_x = 4726
+n_B = 6534
+creds = {'iv': 'cd9da9f1c60925922377ea952afc212c', 'encrypted_flag': 'febcbe3a3414a730b125931dccf912d2239f3e969c4334d95ed0ec86f6449ad8'}
+y1, y2 = sqrt((pow(q_x, 3) + a * q_x + b) % p, p)
+Q1, Q2 = (q_x, int(y1)), (q_x, int(y2))
+if Q1[1] % 4 == 3:
+	secret = scalar_multiplication(Q1, n_B)
+	print(decrypt_flag(scalar_multiplication(n_B, Q1)[0], creds["iv"], creds["encrypted_flag"]))
+else:
+	print(decrypt_flag(scalar_multiplication(n_B, Q2)[0], creds["iv"], creds["encrypted_flag"]))

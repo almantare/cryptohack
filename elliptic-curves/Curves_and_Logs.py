@@ -60,8 +60,10 @@ def scalar_multiplication(n, P):
 
 
 
-P = (2339, 2213)
 
-Q = scalar_multiplication(7863, P)
-print("crypto{"+ f"{Q[0]}, {Q[1]}" + "}")
+G = (1804,5368)
+Q_A = (815, 3190)
+n_B = 1829
 
+from hashlib import sha1
+print("crypto{" + f'{sha1(str(scalar_multiplication(n_B, Q_A)[0]).encode()).hexdigest()}'+"}")
