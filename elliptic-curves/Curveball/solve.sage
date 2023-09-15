@@ -19,5 +19,8 @@ public = E(0x3B827FF5E8EA151E6E51F8D0ABF08D90F571914A595891F9998A5BD49DFA3531, 0
 # a = 115792089210356248762697446949407573529996955224135760342422259061068512044369
 
 a = E.order()
-
+print(a)
 print(public * (a + 1) == public)
+from pwn import *
+conn = remote('socket.cryptohack.org', 13382)
+print(conn.readline())
